@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}Articles{% endblock %}
+
+{% block body %}
+{# All posts #}
+<section class="mx-auto max-w-7xl py-12 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-light tracking-tight sm:text-4xl pb-7">Tous nos articles articles</h2>
+{#    {% for post in posts %}#}
+{#        {{ post.title }} - {{ post.category.name }} ({{ post.createdAt|date('d/m/Y') }})<br>#}
+{#    {% endfor %}#}
+    <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 lg:gap-10">
+        {# Cards #}
+        {% for post in posts %}
+        <article class="group overflow-hidden rounded-2xl bg-base-100 shadow-sm ring-1 ring-base-300 transition hover:-translate-y-1 hover:shadow-xl">
+            <figure class="relative overflow-hidden">
+                <img
+                    src="{{ asset('images/posts/'~post.image) }}"
+                    alt="illustration de l'{{ post.title }}"
+                    class="h-64 w-full object-cover transition duration-500 group-hover:scale-105">
+                <span class="badge badge-primary absolute left-4 top-4 text-white">
+                {{ post.category.name|upper }}
+                    </span>
+            </figure>
+            <div class="p-6">
+                <div class="flex items-center gap-2 text-sm text-base-content/50">
+                    {{ ux_icon('lucide:calendar', {class: 'h-4 w-4'}) }}
+                    <time datetime="{{ post.createdAt|date('Y-m-d') }}">
+                        {{ post.createdAt|date('d/m/Y') }}
+                    </time>
+                </div>
+                <h2 class="mt-3 text-2xl font-[600] tracking-tight">
+                    {{post.title|capitalize}}
+                </h2>
+                <p class="mt-3 leading-relaxed text-base-content/70 line-clamp-3">
+                   {{ post.content }}
+                </p>
+                <div class="mt-6">
+                    <a
+                        href="{{ path('app_post', {slug:post.slug}) }}"
+                        class="btn btn-primary btn-sm text-white">
+                        Lire l'article
+                        {{ ux_icon('lucide:arrow-right', {class: 'h-4 w-4'}) }}
+                    </a>
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,170 @@
+{% block footer %}
+
+    <footer class="border-t border-base-300 bg-base-200">
+
+        <div class="mx-auto w-full lg:max-w-[80%] sm:max-[90%] px-4 py-8 sm:px-6 lg:px-8">
+            <div class="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-around">
+                <div class="max-w-sm">
+                    <a
+                        href=""
+                        class="text-2xl font-extrabold tracking-tight">
+                        Web<span class="text-accent">Posts</span>
+                    </a>
+
+                    <p class="mt-4 text-sm leading-6 text-base-content/60">
+                        Articles, tutoriels et actualités autour du développement
+                        web, des nouvelles technologies et de l'univers numérique.
+                    </p>
+
+                    {# Réseaux sociaux #}
+                    <div class="mt-6 flex items-center gap-2">
+
+                        <a
+                            href="#">
+                            {{ ux_icon('simple-icons:git', {class: 'size-7 text-secondary hover:text-accent'}) }}
+                        </a>
+
+                        <a
+                            href="">
+                            {{ ux_icon('simple-icons:facebook', {class: 'size-7 text-secondary hover:text-accent'}) }}
+                        </a>
+
+                        <a
+                            href="#">
+                            {{ ux_icon('simple-icons:x', {class: 'size-7 text-secondary hover:text-accent'}) }}
+                        </a>
+
+                        <a
+                            href="#">
+                            {{ ux_icon('simple-icons:tiktok', {class: 'size-7 text-secondary hover:text-accent'}) }}
+                        </a>
+                    </div>
+                </div>
+
+                {# Navigation #}
+                <div class="flex flex-wrap gap-12 sm:gap-20">
+
+                    <div>
+                        <h3 class="font-semibold">
+                            Navigation
+                        </h3>
+
+                        <ul class="mt-4 space-y-3 text-sm text-base-content/60">
+                            <li>
+                                <a
+                                    href=""
+                                    class="transition hover:text-primary">                               >
+                                    Accueil
+                                </a>
+                            </li>
+
+                            <li>
+                                <a
+                                    href=""
+                                    class="transition hover:text-primary">
+                                    Articles
+                                </a>
+                            </li>
+
+                            <li>
+                                <a
+                                    href="#"
+                                    class="transition hover:text-primary">
+                                    Événements
+                                </a>
+                            </li>
+
+                            <li>
+                                <a
+                                    href="#"
+                                    class="transition hover:text-primary">
+                                    Catégories
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold">
+                            WebPosts
+                        </h3>
+
+                        <ul class="mt-4 space-y-3 text-sm text-base-content/60">
+                            <li>
+                                <a
+                                    href="#"
+                                    class="transition hover:text-primary">
+                                    À propos
+                                </a>
+                            </li>
+
+                            <li>
+                                <a
+                                    href="#"
+                                    class="transition hover:text-primary">
+                                    Contact
+                                </a>
+                            </li>
+
+                            <li>
+                                <a
+                                    href="#"
+                                    class="transition hover:text-primary">
+                                    Newsletter
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="font-semibold">
+                            Informations
+                        </h3>
+
+                        <ul class="mt-4 space-y-3 text-sm text-base-content/60">
+                            <li>
+                                <a
+                                    href="#"
+                                    class="transition hover:text-primary">
+                                    Mentions légales
+                                </a>
+                            </li>
+
+                            <li>
+                                <a
+                                    href="#"
+                                    class="transition hover:text-primary">
+                                    Confidentialité
+                                </a>
+                            </li>
+
+                            <li>
+                                <a
+                                    href="#"
+                                    class="transition hover:text-primary">
+                                    Cookies
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            {# Copyright #}
+            <div class="mt-10 flex flex-col gap-3 border-t border-base-300 pt-2 text-sm text-base-content/50 sm:flex-row sm:items-center sm:justify-between">
+
+                <p>
+                    © {{ "now"|date("Y") }}
+                    <span class="font-medium text-base-content">
+                    WebPosts
+                </span>
+                    — Tous droits réservés.
+                </p>
+
+                <p class="flex items-center gap-1">
+                    New-York<br>
+                    140 Madison Avenue - USA</p>
+            </div>
+        </div>
+    </footer>
+{% endblock %}

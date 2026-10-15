@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}Home{% endblock %}
+
+{% block body %}
+    {# Hero #}
+       <section class="relative overflow-hidden bg-base-200 min-h-[400px]">
+           <div class="mx-auto md:w-full lg:max-w-[80%] px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+               <div class="grid items-center gap-12 lg:grid-cols-[2fr_3fr] lg:gap-16">
+                   <div class="max-w-3xl">
+                       <p class="text-[1.8rem] italic font-[300] pb-3"> - Le web, simplement -</p>
+                       <h1 class="text-[3rem] font-[400] tracking-tight sm:text-6xl lg:text-8xl">
+                           WebPosts
+                       </h1>
+                       <p class="mt-6 text-xl font-medium leading-relaxed text-base-content/80 sm:text-2xl">
+                           Découvrez le web, une idée à la fois.
+                       </p>
+                       <p class="mt-4 max-w-xl leading-relaxed text-base-content/60">
+                           Articles, tutoriels et actualités autour du développement
+                           web, des frameworks, de la sécurité et des nouvelles
+                           technologies.
+                       </p>
+
+                       {# Boutons #}
+                       <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+
+                           <a href=""
+                               class="btn btn-secondary btn-lg text-white">
+                               Découvrir les articles
+                               {{ ux_icon('lucide:arrow-right') }}
+                           </a>
+                           <a href=""
+                               class="btn btn-outline btn-lg">
+                               En savoir plus
+                               {{ ux_icon('lucide:arrow-right') }}
+                           </a>
+                       </div>
+                   </div>
+
+                   {# Image #}
+                   <div class="relative">
+
+                       {# Décoration #}
+                       <div class="absolute -inset-4 rounded-3xl bg-primary/10 blur-2xl lg:w-[90%]"
+                           aria-hidden="true">
+
+                       </div>
+
+                       <div class="relative overflow-hidden rounded-2xl shadow-2xl">
+                           <img
+                               src="{{ asset('images/hero01.jpg') }}"
+                               alt="Développement web et technologie"
+                               class="object-cover">
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </section>
+       {# Last posts #}
+       <section class="mx-auto max-w-7xl py-12 sm:px-6 lg:px-8">
+       <h2 class="text-3xl font-light tracking-tight sm:text-4xl pb-7">Nos derniers articles</h2>
+       <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 lg:gap-10">
+           {# Cards #}
+           {% for post in posts %}
+           <article class="group overflow-hidden rounded-2xl bg-base-100 shadow-sm ring-1 ring-base-300 transition hover:-translate-y-1 hover:shadow-xl">
+               <figure class="relative overflow-hidden">
+                   <img
+                       src="{{ asset('images/posts/' ~ post.image) }}"
+                       alt="Illustration de l'article {{ post.title }}"
+                       class="h-64 w-full object-cover transition duration-500 group-hover:scale-105">
+                   <span class="badge badge-primary absolute left-4 top-4 text-white">
+                {{ post.category.name|upper }}
+                    </span>
+               </figure>
+               <div class="p-6">
+                   <div class="flex items-center gap-2 text-sm text-base-content/50">
+                      {{ ux_icon('lucide:calendar', {class: 'h-4 w-4'}) }}
+                       <time datetime="{{ post.createdAt|date('Y-m-d') }}">
+                           {{ post.createdAt|date('d/m/Y') }}
+                       </time>
+                   </div>
+                   <h2 class="mt-3 text-2xl font-[600] tracking-tight">
+                       {{ post.title|capitalize }}
+                   </h2>
+                   <p class="mt-3 leading-relaxed text-base-content/70 line-clamp-3">
+                       {{ post.content }}
+                   </p>
+                   <div class="mt-6">
+                       <a
+                           href="{{ path('app_post', {slug:post.slug}) }}"
+                           class="btn btn-primary btn-sm text-white">
+                           Lire l'article
+                           {{ ux_icon('lucide:arrow-right', {class: 'h-4 w-4'}) }}
+                       </a>
+                   </div>
+               </div>
+           </article>
+           {% endfor %}
+       </div>
+   </section>
+
+{% endblock %}

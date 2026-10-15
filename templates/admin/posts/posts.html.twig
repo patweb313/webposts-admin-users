@@ -1,0 +1,93 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}{{ parent()}}articles{% endblock %}
+
+{% block body %}
+    <div class="container mx-auto px-4 py-8">
+        {# Message Flash #}
+        {% include 'admin/partials/flash.html.twig' %}
+        <div class="flex justify-between gap-4 mb-8">
+            <div>
+                <h1 class="text-3xl font-light">Administration des articles</h1>
+                <p class="text-base-content/60 mt-1">
+                    Gérez vos articles et leur publication.
+                </p>
+            </div>
+            <a href="{{ path('app_admin_newpost') }}" class="btn btn-primary">
+                {{ ux_icon('material-symbols-light:add', { class: 'w-6 h-6' }) }}Nouvel article
+            </a>
+        </div>
+        {# Tableau #}
+        <div class="card bg-base-100 shadow-xl">
+            <div class="card-body p-0">
+                    <table class="table table-zebra">
+                        <thead>
+                        <tr>
+                            <th>Titre</th>
+                            <th>Catégorie</th>
+                            <th>Statut</th>
+                            <th>Date</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% for post in posts %}
+                            <tr>
+                                <td>
+                                    <div class="flex items-center gap-3">
+                                            <div class="avatar">
+                                                <div class="rounded-full w-12 h-12">
+                                                    <img src="{{ asset('images/posts/' ~ post.image) }}" alt="{{ post.title }}">
+                                                </div>
+                                            </div>
+                                        <div>
+                                            <div class="font-light">
+                                                {{ post.title|capitalize }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a href="" class="badge badge-outline">{{ post.category.name }}</a>
+                                </td>
+                                <td>
+                                    {% if post.isPublished %}
+                                    <span class="badge badge-success gap-2">
+                                        <span class="w-2 h-2 rounded-full bg-current"></span>
+                                        Publié
+                                    </span>
+                                    {% else %}
+                                    <span class="badge badge-warning gap-2">
+                                        <span class="w-2 h-2 rounded-full bg-current"></span>
+                                        Brouillon
+                                    </span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <div class="text-sm">
+                                        {{ post.createdAt|date('d/m/Y') }}
+                                    </div>
+                                    <div class="text-xs opacity-50">
+                                        {{ post.createdAt|date('H:i') }}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="flex justify-center gap-2">
+                                        <a href="" class="btn btn-sm btn-ghost" title="Voir">Voir</a>
+                                        <a href="{{ path('app_admin_editpost', {id: post.id}) }}" class="btn btn-sm btn-info btn-outline">Modifier</a>
+                                        <a href="{{ path('app_admin_posts_delete', {id: post.id}) }}" class="btn btn-sm btn-error btn-outline">Supprimer</a>
+                                        {% if post.isPublished %}
+                                            <a href="{{ path('app_admin_posts_view', {id: post.id}) }}" class="btn btn-secondary btn-sm btn-outline">Masquer</a>
+                                        {% else %}
+                                            <a href="{{ path('app_admin_posts_view', {id: post.id}) }}" class="btn btn-secondary btn-sm btn-outline">Afficher</a>
+                                        {% endif %}
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+  {% endblock %}

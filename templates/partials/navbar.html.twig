@@ -1,0 +1,63 @@
+{% block navbar %}
+    <div class="max-lg:collapse bg-base-200 shadow-sm w-full rounded-md">
+        <input id="navbar-1-toggle" class="peer hidden" type="checkbox">
+        <label for="navbar-1-toggle" class="fixed inset-0 hidden max-lg:peer-checked:block"></label>
+        <div class="collapse-title navbar bg-primary text-white">
+            <div class="navbar-start">
+                <label for="navbar-1-toggle" class="btn btn-secondary lg:hidden mr-2.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" color="white"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+                </label>
+                <a
+                    href=""
+                    class="text-2xl font-extrabold tracking-tight"
+                >
+                    Web<span class="text-accent">Posts</span>
+                </a>
+            </div>
+            <div class="navbar-center hidden lg:flex">
+                <ul class="menu menu-horizontal px-1">
+                    <li><a href="{{ path('app_home') }}">Accueil</a></li>
+                    <li><a href="">About Us</a></li>
+                    <li>
+                        <details>
+                            <summary>Catégories</summary>
+                            <ul class="p-2 mt-5 bg-base-100 w-40 z-1 bg-primary text-white">
+                                <li><a href="{{ path('app_posts') }}">Toutes</a></li>
+                                {{ render(controller('App\\Controller\\CategoryController::categories')) }}
+                            </ul>
+                        </details>
+                    </li>
+                    <li><a href="">Events</a></li>
+                    <li><a href="">Contact</a></li>
+                </ul>
+            </div>
+            <div class="navbar-end">
+                <a href="" class="btn btn-secondary btn-sm text-white mr-2">
+                    {{ ux_icon('lucide:user-check', {class: 'size-4'}) }} Se connecter
+                </a>
+                <a href="" class="btn btn-secondary btn-sm text-white">
+                    {{ ux_icon('lucide:user-plus',  {class: 'size-4'}) }} S'inscrire
+                </a>
+            </div>
+        </div>
+
+        <div class="collapse-content lg:hidden z-1">
+            <ul class="menu">
+                <li><a href="{{ path('app_home') }}">Accueil</a></li>
+                <li><a href="">About Us</a></li>
+                <li>
+                    <a href="">Catégories</a>
+                    <ul>
+                        <li><a href="{{ path('app_posts') }}">Toutes</a></li>
+                        <li><a href="">Frameworks</a></li>
+                        <li><a href="">Security</a></li>
+                        <li><a href="">Network</a></li>
+                        <li><a href="">Coding</a></li>
+                    </ul>
+                </li>
+                <li><a href="">News</a></li>
+                <li><a href="">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}

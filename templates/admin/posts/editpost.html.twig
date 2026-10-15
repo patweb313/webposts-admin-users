@@ -1,0 +1,18 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}{{ parent() }}Edit Post{% endblock %}
+
+{% block body %}
+    <section class="max-w-4xl mx-auto">
+        <div class="flex justify-between my-12">
+            <h1 class="text-3xl font-light">Modifier un article</h1>
+            <a href="{{ path('app_admin_posts') }}" class="btn btn-ghost"><- Retour aux articles</a>
+        </div>
+        <div class="admin">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <input type="submit" value="Modifier l'article" class="btn btn-primary text-white mt-4 w-[20rem]">
+            {{ form_end(form) }}
+        </div>
+    </section>
+{% endblock %}
