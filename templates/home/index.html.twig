@@ -74,10 +74,14 @@
                </figure>
                <div class="p-6">
                    <div class="flex items-center gap-2 text-sm text-base-content/50">
-                      {{ ux_icon('lucide:calendar', {class: 'h-4 w-4'}) }}
-                       <time datetime="{{ post.createdAt|date('Y-m-d') }}">
+                        {{ ux_icon('lucide:user', {class: 'h-4 w-4' }) }}
+                       <span class="font-bold">
+                            {{ post.user.firstName }}  {{ post.user.lastName }}
+                       </span>
+                        {{ ux_icon('lucide:calendar', {class: 'h-4 w-4 ml-4'}) }}
+                        <time datetime="{{ post.createdAt|date('Y-m-d') }}">
                            {{ post.createdAt|date('d/m/Y') }}
-                       </time>
+                        </time>
                    </div>
                    <h2 class="mt-3 text-2xl font-[600] tracking-tight">
                        {{ post.title|capitalize }}

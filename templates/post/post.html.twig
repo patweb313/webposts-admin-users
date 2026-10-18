@@ -28,9 +28,12 @@
                                 {{ post.updatedAt|date('d/m/Y') }}
                             </time>
                         </div>
-                        <h2 class="mt-3 text-2xl font-[600] tracking-tight">
+                        <h2 class="mt-3 text-3xl font-[400] tracking-tight">
                             {{post.title|capitalize}}
                         </h2>
+                        <h3 class="mt-3 text-2xl font-[300] tracking-tight">
+                            {{ post.user.firstName }} {{ post.user.lastName }}
+                        </h3>
                         <p class="mt-3 leading-relaxed text-base-content/70">
                             {{ post.content }}
                         </p>

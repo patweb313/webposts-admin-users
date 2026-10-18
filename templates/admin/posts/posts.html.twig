@@ -25,6 +25,7 @@
                         <tr>
                             <th>Titre</th>
                             <th>Catégorie</th>
+                            <th>Auteur</th>
                             <th>Statut</th>
                             <th>Date</th>
                             <th class="text-center">Actions</th>
@@ -49,6 +50,9 @@
                                 </td>
                                 <td>
                                     <a href="" class="badge badge-outline">{{ post.category.name }}</a>
+                                </td>
+                                <td>
+                                    {{ post.user.firstName }} {{ post.user.lastName }}
                                 </td>
                                 <td>
                                     {% if post.isPublished %}
