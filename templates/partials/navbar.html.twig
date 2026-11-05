@@ -44,12 +44,19 @@
                     <ul class="menu menu-horizontal px-1 mr-8">
                         <li>
                             <details class="dropdown">
-                            <summary>{{app.user.firstName}} {{app.user.lastName }}</summary>
-                            <ul class="bg-base-100 rounded-t-none p-2 dropdown-content">
+                            <summary>
+                                <img src="{{ asset('images/avatar/' ~ app.user.imageName) }}" alt="" class="w-8 h-8 rounded-full mr-0.5">
+                                {{app.user.firstName}} {{app.user.lastName }}</summary>
+                            <ul class="rounded-t-none p-2 dropdown-content bg-primary">
                                 <li><a>Mon profile</a></li>
                                 <li><a>Modifier le profile</a></li>
                                 <li><a href="{{ logout_path() }}">Se déconnecter</a></li>
-
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <li class="mt-2 border-t border-white/40 pt-2 mx-2">
+                                        <span class="hidden"></span>
+                                    </li>
+                                    <li><a href="{{ path('app_admin_posts') }}">Administration</a></li>
+                                {% endif %}
                             </ul>
                             </details>
                         </li>
