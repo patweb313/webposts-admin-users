@@ -21,4 +21,5 @@ final class HomeController extends AbstractController
             'posts' => $posts,
         ]);
     }
+
 }
