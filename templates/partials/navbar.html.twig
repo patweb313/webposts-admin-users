@@ -32,12 +32,30 @@
                 </ul>
             </div>
             <div class="navbar-end">
-                <a href="" class="btn btn-secondary btn-sm text-white mr-2">
+                {% if not app.user %}
+                <a href="{{ path('app_login') }}" class="btn btn-secondary btn-sm text-white mr-2">
                     {{ ux_icon('lucide:user-check', {class: 'size-4'}) }} Se connecter
                 </a>
                 <a href="" class="btn btn-secondary btn-sm text-white">
                     {{ ux_icon('lucide:user-plus',  {class: 'size-4'}) }} S'inscrire
                 </a>
+                {% else %}
+                    {# Menu déroulant pour l'utilisateur connecté #}
+                    <ul class="menu menu-horizontal px-1 mr-8">
+                        <li>
+                            <details class="dropdown">
+                            <summary>{{app.user.firstName}} {{app.user.lastName }}</summary>
+                            <ul class="bg-base-100 rounded-t-none p-2 dropdown-content">
+                                <li><a>Mon profile</a></li>
+                                <li><a>Modifier le profile</a></li>
+                                <li><a href="{{ logout_path() }}">Se déconnecter</a></li>
+
+                            </ul>
+                            </details>
+                        </li>
+                        </ul>
+                  
+                {% endif %}
             </div>
         </div>
 
