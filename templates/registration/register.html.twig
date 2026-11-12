@@ -3,10 +3,14 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+    <div class="max-w-4xl mx-auto bg-gray-200 flex-wrap justify-items-center m-5 p-5">
+    <h1 class="text-3xl font-light w-[50%] pb-4 text-center">S'inscrire</h1>
+    <div class="w-[50%] register">
     {{ form_errors(registrationForm) }}
     {{ form_start(registrationForm) }}
         {{ form_widget(registrationForm) }}
-        <button type="submit" class="btn">Register</button>
+        <button type="submit" class="btn btn-primary mt-4 w-[20rem]">S'enregistrer</button>
     {{ form_end(registrationForm) }}
+    </div>
+    </div>
 {% endblock %}

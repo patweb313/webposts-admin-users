@@ -14,6 +14,7 @@ use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Vich\UploaderBundle\Form\Type\VichImageType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
 class RegistrationFormType extends AbstractType
 {
@@ -35,18 +36,27 @@ class RegistrationFormType extends AbstractType
                 'download_uri'  => false,
                 'asset_helper'  => true,
             ])
-            ->add('plainPassword', PasswordType::class, [
+            ->add('plainPassword', RepeatedType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
+                'type'  => PasswordType::class,
                 'mapped' => false,
-                'attr' => ['autocomplete' => 'new-password'],
+                'invalid_message' => 'Les mots de passe de correspondent pas',
+                'first_options' => [
+                    'label' => 'Mot de passe',
+                    'attr' => ['autocomplete' => 'new-password'],
+                ],
+                'second_options' => [
+                    'label' => 'Confirmer le mot de passe',
+                    'attr' => ['autocomplete' => 'new-password'],
+                ],
                 'constraints' => [
                     new NotBlank(
-                        message: 'Please enter a password',
+                        message: 'Entrez un mot de passe',
                     ),
                     new Length(
                         min: 6,
-                        minMessage: 'Your password should be at least {{ limit }} characters',
+                        minMessage: 'Votre mot de passe doit contenir au minimum {{ limit }} characters',
                         // max length allowed by Symfony for security reasons
                         max: 4096,
                     ),

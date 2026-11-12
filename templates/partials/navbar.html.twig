@@ -21,7 +21,7 @@
                     <li>
                         <details>
                             <summary>Catégories</summary>
-                            <ul class="p-2 mt-5 bg-base-100 w-40 z-1 bg-primary text-white">
+                            <ul class="p-2 mt-5 w-40 z-1 bg-primary text-white">
                                 <li><a href="{{ path('app_posts') }}">Toutes</a></li>
                                 {{ render(controller('App\\Controller\\CategoryController::categories')) }}
                             </ul>
@@ -36,7 +36,7 @@
                 <a href="{{ path('app_login') }}" class="btn btn-secondary btn-sm text-white mr-2">
                     {{ ux_icon('lucide:user-check', {class: 'size-4'}) }} Se connecter
                 </a>
-                <a href="" class="btn btn-secondary btn-sm text-white">
+                <a href="{{path('app_register') }}" class="btn btn-secondary btn-sm text-white">
                     {{ ux_icon('lucide:user-plus',  {class: 'size-4'}) }} S'inscrire
                 </a>
                 {% else %}
@@ -55,7 +55,8 @@
                                     <li class="mt-2 border-t border-white/40 pt-2 mx-2">
                                         <span class="hidden"></span>
                                     </li>
-                                    <li><a href="{{ path('app_admin_posts') }}">Administration</a></li>
+                                    {# data-turbo permet de désactiver ux-turbo de Symfony pour l'actualisation du thème de l'admin#}
+                                    <li><a href="{{ path('app_admin_posts') }}" data-turbo="false">Administration</a></li>
                                 {% endif %}
                             </ul>
                             </details>

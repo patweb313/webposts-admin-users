@@ -28,3 +28,11 @@
     width: 100%;
     margin-top: 1rem;
 }
+
+/* Register styles */
+.register input:not([type="checkbox"]) {
+    width: 100%;
+    margin-bottom: 1rem;
+    border: 1px solid #5E81AC;
+    outline: none;
+}

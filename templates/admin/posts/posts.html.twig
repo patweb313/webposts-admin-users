@@ -3,6 +3,7 @@
 {% block title %}{{ parent()}}articles{% endblock %}
 
 {% block body %}
+    {% include "admin/partials/navbar.html.twig" %}
     <div class="container mx-auto px-4 py-8">
         {# Message Flash #}
         {% include 'admin/partials/flash.html.twig' %}
