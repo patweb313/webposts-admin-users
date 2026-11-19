@@ -1,0 +1,110 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}{{ parent()}}utilisateurs{% endblock %}
+
+{% block body %}
+    {% include "admin/partials/navbar.html.twig" %}
+    <div class="container mx-auto px-4 py-8">
+        {# Message Flash #}
+        {% include 'admin/partials/flash.html.twig' %}
+        <div class="flex justify-between gap-4 mb-8">
+            <div>
+                <h1 class="text-3xl font-light">Administration des utilisateurs</h1>
+                <p class="text-base-content/60 mt-1">
+                    Gérez vos utilisateurs.
+                </p>
+            </div>
+            <a href="" class="btn btn-primary">
+                {{ ux_icon('material-symbols-light:add', { class: 'w-6 h-6' }) }}Nouvel utilisateur
+            </a>
+        </div>
+        {# Tableau #}
+        <div class="card bg-base-100 shadow-xl">
+            <div class="card-body p-0">
+                    <table class="table table-zebra">
+                        <thead>
+                        <tr>
+                            <th>{{ knp_pagination_sortable(users, 'Nom ↑↓', 'u.lastName') }}</th>
+                            <th>{{ knp_pagination_sortable(users, 'Email ↑↓', 'u.email') }}</th>
+                            <th>{{ knp_pagination_sortable(users, 'Création ↑↓', 'u.createdAt') }}</th>
+                            <th>{{ knp_pagination_sortable(users, 'Mise à jour ↑↓', 'u.updatedAt') }}</th>
+                            <th>{{ knp_pagination_sortable(users, 'Actif ↑↓', 'u.isDisabled') }}</th>
+                            <th>Rôle</th>
+                            {% if is_granted ('ROLE_SUPER_ADMIN') %}
+                            <th class="text-center">Actions</th>
+                            {% endif %}
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% for user in users %}
+                            <tr>
+                                <td>
+                                    <div class="flex items-center gap-3">
+                                            <div class="avatar">
+                                                <div class="rounded-full w-12 h-12">
+                                                    {% if user.imageName %}
+                                                    <img src="{{ asset('images/avatar/' ~ user.imageName) }}" alt="{{ user.lastName }}">
+                                                    {% else %}
+                                                    <img src="{{ asset('images/avatar/default.png') }}" alt="{{ user.lastName }}">
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        <div>
+                                            <div class="font-light">
+                                                {{ user.firstName }} {{ user.lastName }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    {{ user.Email }}
+                                </td>
+                                <td>
+                                    {{ user.createdAt|date('d/m/Y') }}
+                                </td>
+                                <td>
+                                    {{ user.updatedAt|date('d/m/Y') }}
+                                </td>
+                                <td>
+                                    {% if user.isDisabled %}
+                                    <span class="badge badge-success gap-2">
+                                        <span class="w-2 h-2 rounded-full bg-current"></span>
+                                        Désactivé
+                                    </span>
+                                    {% else %}
+                                    <span class="badge badge-warning gap-2">
+                                        <span class="w-2 h-2 rounded-full bg-current"></span>
+                                        Actif
+                                    </span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ user.roles|first|replace({'ROLE_': ''})|capitalize }}</td>
+                                {% if is_granted ('ROLE_SUPER_ADMIN') %}
+                                <td>
+                                    <div class="flex justify-start gap-2">
+                                        <a href="" class="btn btn-sm btn-info btn-outline">Modifier</a>
+                                        {% if 'ROLE_SUPER_ADMIN' not in user.roles %}
+                                        <a href="" class="btn btn-sm btn-error btn-outline">Supprimer</a>
+                                        {% if user.isDisabled %}
+                                            <a href="" class="btn btn-secondary btn-sm btn-outline">Afficher</a>
+                                        {% else %}
+                                            <a href="" class="btn btn-secondary btn-sm btn-outline">Masquer</a>
+                                        {% endif %}
+                                        {% else %}
+                                            <a href="" class="btn btn-accent btn-sm btn-outline btn-disabled">Compte protégé</a>
+                                        {% endif %}
+                                    </div>
+                                </td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="flex justify-center mt-6">
+                         {{ knp_pagination_render(users) }}    
+                    </div>
+                </div>
+            </div>
+        </div>
+  {% endblock %}
+

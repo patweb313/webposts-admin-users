@@ -5,7 +5,9 @@ namespace App\Repository;
 use App\Entity\Category;
 use App\Entity\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
+
 
 /**
  * @extends ServiceEntityRepository<Post>
@@ -52,5 +54,16 @@ class PostRepository extends ServiceEntityRepository
             ->orderBy('p.createdAt', 'DESC')
             ->getQuery()
             ->getResult();
+    }
+
+    public function findForPaginationFilter(): Query
+    {
+        return $this->createQueryBuilder('p')
+            ->leftJoin('p.category', 'c')
+            ->addSelect('c')
+            ->leftJoin('p.user', 'u')
+            ->addSelect('u')
+            ->orderBy('p.createdAt', 'DESC')
+            ->getQuery();
     }
 }

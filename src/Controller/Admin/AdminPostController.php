@@ -6,6 +6,7 @@ use App\Entity\Post;
 use App\Form\PostType;
 use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,14 +17,15 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 final class AdminPostController extends AbstractController
 {
     #[Route('/admin/posts', name: 'app_admin_posts')]
-    public function posts(PostRepository $repository): Response
+    public function posts(PostRepository $repository, Request $request, PaginatorInterface $paginator): Response
     {
-        $posts = $repository->findBy(
-            [],
-            ['createdAt' => 'DESC']
-        );
+        // Requête
+        $posts = $repository->findForPaginationFilter();
+        
+        // Pagination
+        $pagination = $paginator->paginate($posts, $request->query->getInt('page', 1), 10);
         return $this->render('admin/posts/posts.html.twig', [
-            'posts' => $posts,
+            'posts' => $pagination,
         ]);
     }
 
